@@ -1,6 +1,4 @@
 import scala.language.postfixOps
-//import org.apache.commons.FileUtils
-
 
 object CSS{
  val allSelectors: collection.mutable.Set[ RawSelector ] = collection.mutable.Set()
@@ -208,42 +206,3 @@ object SharedCssJsHtml{
   val thirdClass  = "third"
 }
 
-object S extends App{
-  import CSS._
-
-  val firstClass  = SharedCssJsHtml.firstClass 
-  val secondClass = SharedCssJsHtml.secondClass
-  val thirdClass  = SharedCssJsHtml.thirdClass 
-
-
-  def minLimitMixin = Seq(
-    'minHeight := "40px",
-    'minWidth := "30px"
-  )
-
-  Selector( firstClass ) > secondClass __ thirdClass style( 
-    width( 3 px ), 
-    height( 7 pc ),
-    'borderLeft := "3px solid red",
-    backgroundColor( Color( "#333" ) )
-  ) style( minLimitMixin: _* )
-
-  Selector( firstClass ) + secondClass style(
-    position.static,
-    left( 3 px ),
-    top( 4 rem )
-  ) style( minLimitMixin: _* )
-
-  Selector( firstClass ) chain secondClass style(
-    Symbol( "-webkit-border-radius" ) := "3px 2px" 
-  )
-
-  val x = Selector( secondClass ) ~ thirdClass 
-  val y = x pseudo "hover"
-  y style(
-    'padding := "3px 4px"
-  )
-
-
-  CSS.render
-}
